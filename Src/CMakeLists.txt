@@ -6,10 +6,7 @@ find_package(OpenMP REQUIRED)
 add_library(LIBLINEAR LibLinear/linear.cpp LibLinear/linear.h LibLinear/train.c LibLinear/tron.cpp LibLinear/tron.h)
 add_library(BLAS LibLinear/blas/blas.h LibLinear/blas/blasp.h LibLinear/blas/daxpy.c LibLinear/blas/ddot.c LibLinear/blas/dnrm2.c LibLinear/blas/dscal.c)
 
-#OPENCV
-#include_directories(/usr/local/include)
-#link_directories(/usr/local/lib)
-##if this does not work, then try to uncomment the things below.
+# OPENCV
 find_package( OpenCV REQUIRED )
 if(OpenCV_FOUND)
  include_directories( ${OpenCV_INCLUDE_DIRS} )
