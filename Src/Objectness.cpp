@@ -299,21 +299,28 @@ void Objectness::gradientXY(CMat &x1i, CMat &y1i, Mat &mag1u)
 
 void Objectness::trainObjectness(int numDetPerSize)
 {
-    CmTimer tm1("Train1"), tm2("Train 2");
+  CmTimer tm1("Train 1"), tm2("Train 2");
 
-	//* Learning stage I    
-	generateTrianData();
-    tm1.Start();
-	trainStageI();
-    tm1.Stop();
-    printf("Learning stage I takes %g seconds... \n", tm1.TimeInSeconds()); //*/
+  // Learning stage I
+  generateTrianData();
+  tm1.Start();
 
-	//* Learning stage II
-	tm2.Start();
-	trainStateII(numDetPerSize);
-	tm2.Stop();
-	printf("Learning stage II takes %g seconds... \n", tm2.TimeInSeconds()); //*/
-	return;
+  if(CmFile::IsFileExist(_modelName + ".wS1") == false)
+  {
+    trainStageI();
+  }
+  tm1.Stop();
+  printf("Learning stage I takes %g seconds... \n", tm1.TimeInSeconds()); //*/
+
+  // Learning stage II
+  tm2.Start();
+  if(CmFile::IsFileExist(_modelName + ".wS2") == false)
+  {
+    trainStageII(numDetPerSize);
+  }
+  tm2.Stop();
+  printf("Learning stage II takes %g seconds... \n", tm2.TimeInSeconds()); //*/
+  return;
 }
 
 void Objectness::generateTrianData()
@@ -435,7 +442,7 @@ int Objectness::gtBndBoxSampling(const Vec4i &bbgt, vector<Vec4i> &samples, vecI
 	return samples.size();
 }
 
-void Objectness::trainStateII(int numPerSz)
+void Objectness::trainStageII(int numPerSz)
 {
 	loadTrainedModel();
 	const int NUM_TRAIN = _voc.trainNum;

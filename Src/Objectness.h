@@ -91,7 +91,7 @@ private: // Help functions
 
 	void generateTrianData();
 	void trainStageI();
-	void trainStateII(int numPerSz = 100);
+	void trainStageII(int numPerSz = 100);
 	void predictBBoxSI(CMat &mag3u, ValStructVec<float, Vec4i> &valBoxes, vecI &sz, int NUM_WIN_PSZ = 100, bool fast = true);
 	void predictBBoxSII(ValStructVec<float, Vec4i> &valBoxes, const vecI &sz);
 	
