@@ -93,8 +93,8 @@ inline Rect Vec4i2Rect(Vec4i &v){return Rect(Point(v[0] - 1, v[1] - 1), Point(v[
 #endif
 
 #define __POPCNT__
-#include <immintrin.h>
-#include <popcntintrin.h>
+//#include <immintrin.h>
+//#include <popcntintrin.h>
 #ifdef __WIN32
 # include <intrin.h>
 # define POPCNT(x) __popcnt(x)
